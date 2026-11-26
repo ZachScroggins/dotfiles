@@ -14,6 +14,7 @@ set -euo pipefail
 
 REPO_URL=${DOTFILES_REPO:-https://github.com/ZachScroggins/dotfiles.git}
 DOTFILES_DIR=${DOTFILES_DIR:-$HOME/dotfiles}
+DOTFILES_BRANCH=${DOTFILES_BRANCH:-}   # clone a branch other than the default (testing)
 APPLY_DEFAULTS=1
 for arg in "$@"; do
   case $arg in
@@ -30,6 +31,8 @@ warn() { printf '\033[1;33m!! %s\033[0m\n' "$*" >&2; }
 
 # 1. Homebrew (its installer also installs the Command Line Tools, which bring git)
 sudo -v
+# keep the sudo timestamp fresh: cask installers ask for it mid-run
+while true; do sudo -n true; sleep 50; kill -0 "$$" 2>/dev/null || exit; done 2>/dev/null &
 if ! [ -x /opt/homebrew/bin/brew ]; then
   info "Installing Homebrew"
   NONINTERACTIVE=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -41,7 +44,7 @@ if [ -n "$script_dir" ] && [ -f "$script_dir/.chezmoiroot" ]; then
   DOTFILES_DIR=$script_dir
 elif ! [ -d "$DOTFILES_DIR/.git" ]; then
   info "Cloning $REPO_URL to $DOTFILES_DIR"
-  git clone "$REPO_URL" "$DOTFILES_DIR"
+  git clone ${DOTFILES_BRANCH:+--branch "$DOTFILES_BRANCH"} "$REPO_URL" "$DOTFILES_DIR"
 fi
 
 # 2. Terminal layer, shared with Linux

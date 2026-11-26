@@ -17,6 +17,7 @@ set -eu
 
 REPO_URL=${DOTFILES_REPO:-https://github.com/ZachScroggins/dotfiles.git}
 DOTFILES_DIR=${DOTFILES_DIR:-$HOME/dotfiles}
+DOTFILES_BRANCH=${DOTFILES_BRANCH:-}   # clone a branch other than the default (testing)
 WITH_DEV=0
 BREW_MODE=auto
 SET_SHELL=1
@@ -264,7 +265,7 @@ fetch_repo() {
     git -C "$DOTFILES_DIR" pull --ff-only || warn "git pull failed; using the current checkout"
   else
     info "Cloning $REPO_URL to $DOTFILES_DIR"
-    git clone "$REPO_URL" "$DOTFILES_DIR"
+    git clone ${DOTFILES_BRANCH:+--branch "$DOTFILES_BRANCH"} "$REPO_URL" "$DOTFILES_DIR"
   fi
 }
 
