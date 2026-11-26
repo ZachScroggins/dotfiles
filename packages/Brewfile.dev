@@ -1,0 +1,38 @@
+# Brewfile.dev: heavier CLI toolchains. Mac always; Linux only with `install-cli.sh --dev`.
+
+# Official Amazon AWS command-line interface
+brew "awscli"
+# Collection of portable C++ source libraries
+brew "boost"
+# Core application library for C
+brew "glib"
+# Cross-platform make
+brew "cmake"
+# Documentation for CMake
+brew "cmake-docs"
+# Pack, ship and run any application as a lightweight container
+brew "docker"
+# LLVM bytecode to JavaScript compiler
+brew "emscripten"
+# Play, record, convert, and stream many audio and video codecs
+brew "ffmpeg-full", link: true
+# Interpreter for PostScript and PDF
+brew "ghostscript"
+# Tools and libraries to manipulate images in select formats
+brew "imagemagick"
+# CLI for Mermaid library
+brew "mermaid-cli"
+# Minimalist GNU for Windows and GCC cross-compilers
+brew "mingw-w64"
+# General-purpose scripting language
+brew "php"
+# Tool to automatically fix PHP coding standards issues
+brew "php-cs-fixer"
+# Prettier daemon
+brew "prettierd"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.14"
+# Powerful, clean, object-oriented scripting language
+brew "ruby"
+# Modernized, complete, self-contained TeX/LaTeX engine
+brew "tectonic"

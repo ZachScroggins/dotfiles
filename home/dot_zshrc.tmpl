@@ -1,0 +1,133 @@
+# ~/.zshrc — interactive shell setup. No PATH changes here (see ~/.zprofile).
+
+# --- Shell options (replaces what oh-my-zsh set) ---------------------------
+setopt AUTO_CD AUTO_PUSHD PUSHD_IGNORE_DUPS PUSHD_SILENT
+setopt EXTENDED_GLOB INTERACTIVE_COMMENTS
+setopt SHARE_HISTORY HIST_IGNORE_DUPS HIST_IGNORE_SPACE HIST_REDUCE_BLANKS EXTENDED_HISTORY
+HISTFILE=~/.zsh_history; HISTSIZE=50000; SAVEHIST=50000
+
+alias -- -='cd -'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias md='mkdir -p'
+
+# --- Completion (full rebuild at most once a day) ---------------------------
+autoload -Uz compinit
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then compinit; else compinit -C; fi
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
+# --- git aliases (the few oh-my-zsh ones worth keeping) ---------------------
+alias g=git gst='git status' gco='git checkout' gcmsg='git commit -m' gp='git push' gl='git pull' gd='git diff' ga='git add'
+
+# --- Aliases ---------------------------------------------------------------
+{{ if eq .chezmoi.os "darwin" -}}
+alias vim=nvim
+alias tmux="tmux -2"
+alias ls="eza --icons --git"
+alias la="eza -a --icons --git"
+alias ll="eza -la --icons --git"
+alias lt="eza --tree --level=2 --long --icons --git"
+alias brewbackup="brew bundle dump --force --file=$HOME/Brewfile"
+alias brewupgrade="brew update && brew upgrade && brew bundle dump --force --file=$HOME/Brewfile"
+alias npmbackup="npm ls -g --depth 0 > $HOME/globalnpmpackages.txt"
+alias npmupdate="npx npm-check-updates -g -u && npmbackup"
+alias piupdate="pi update --all"
+alias updateall="brewupgrade && npmupdate && piupdate"
+{{ else -}}
+(( $+commands[nvim] )) && alias vim=nvim
+alias tmux="tmux -2"
+if (( $+commands[eza] )); then
+  alias ls="eza --icons --git"
+  alias la="eza -a --icons --git"
+  alias ll="eza -la --icons --git"
+  alias lt="eza --tree --level=2 --long --icons --git"
+else
+  alias ls="ls --color=auto"
+  alias la="ls -A --color=auto"
+  alias ll="ls -lA --color=auto"
+fi
+# Debian/Ubuntu ship fd as `fdfind`
+(( $+commands[fdfind] && ! $+commands[fd] )) && alias fd=fdfind
+{{ end -}}
+alias resource="exec zsh -l"   # fresh login shell: reloads .zprofile and .zshrc
+alias pi4="ssh zach@192.168.1.192"
+alias pi3="ssh zach@192.168.1.127"
+alias pq="pi --model claude-bridge/claude-haiku-5-5:low -p" # usage: `pq "quick query inside quotes"`
+
+bindkey -v
+
+# --- Key bindings (Option+Left / Option+Right) -----------------------------
+bindkey "\e[1;3D" backward-word
+bindkey "\e[1;3C" forward-word
+
+
+# --- Node (fnm) ------------------------------------------------------------
+{{ if eq .chezmoi.os "darwin" -}}
+eval "$(fnm env --use-on-cd --shell zsh)"
+{{ else -}}
+(( $+commands[fnm] )) && eval "$(fnm env --use-on-cd --shell zsh)"
+{{ end }}
+# --- Claude Code: GitHub MCP token only for claude, not every process -------
+claude() {
+  GITHUB_PERSONAL_ACCESS_TOKEN="$(gh auth token)" command claude "$@"
+}
+
+# --- Config ------------------------------------------------------------
+export XDG_CONFIG_HOME="{{ .chezmoi.homeDir }}/.config"
+
+# --- Zoxide: Better cd with fuzzy find --------------------------------------
+{{ if eq .chezmoi.os "darwin" -}}
+eval "$(zoxide init zsh)"
+{{ else -}}
+(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
+{{ end }}
+# --- superfile: terminal file manager --------------------------------------
+spf() {
+    # Ask the binary where it writes the lastdir file, so this works for every
+    # installation method (Homebrew, package managers, manual install, ...)
+    # assigned inside `if`: `export VAR="$(...)"` always reports success, so a
+    # failed lookup would go unnoticed (SC2155)
+    if SPF_LAST_DIR="$(command spf path-list --lastdir-file)"; then
+        export SPF_LAST_DIR
+    else
+        SPF_LAST_DIR=''
+    fi
+
+    command spf "$@"
+
+    [ ! -f "$SPF_LAST_DIR" ] || {
+        . "$SPF_LAST_DIR"
+        rm -f -- "$SPF_LAST_DIR" > /dev/null
+    }
+}
+
+# --- Autosuggestions --------------------------------------------------------
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#dfafff"
+{{ if eq .chezmoi.os "darwin" -}}
+source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+{{ else -}}
+# Homebrew first, then the distro locations (Debian/Fedora vs Arch/Alpine/Void)
+for _f in "$HOMEBREW_PREFIX"/share/zsh-autosuggestions \
+          /usr/share/zsh-autosuggestions /usr/share/zsh/plugins/zsh-autosuggestions \
+          /usr/local/share/zsh-autosuggestions; do
+  [[ -r $_f/zsh-autosuggestions.zsh ]] && { source "$_f/zsh-autosuggestions.zsh"; break; }
+done
+{{ end }}
+# --- Prompt: starship -------------------------------------------------------
+{{ if eq .chezmoi.os "darwin" -}}
+eval "$(starship init zsh)"
+{{ else -}}
+(( $+commands[starship] )) && eval "$(starship init zsh)"
+{{ end }}
+# --- Syntax highlighting: must be sourced last -----------------------------
+{{ if eq .chezmoi.os "darwin" -}}
+source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+{{ else -}}
+for _f in "$HOMEBREW_PREFIX"/share/zsh-syntax-highlighting \
+          /usr/share/zsh-syntax-highlighting /usr/share/zsh/plugins/zsh-syntax-highlighting \
+          /usr/local/share/zsh-syntax-highlighting; do
+  [[ -r $_f/zsh-syntax-highlighting.zsh ]] && { source "$_f/zsh-syntax-highlighting.zsh"; break; }
+done
+unset _f
+{{ end -}}

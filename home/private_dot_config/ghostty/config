@@ -1,0 +1,14 @@
+theme = custom-cyberpunk.ghostty
+# theme = Catppuccin Mocha
+
+shell-integration-features = no-cursor
+
+font-family = "SourceCodePro NFM"
+font-size = 15
+
+macos-option-as-alt = true
+macos-titlebar-proxy-icon = hidden
+
+# custom-shader = ./shaders/space.glsl
+# background-opacity = 0.9
+# background-blur-radius = 20 

@@ -1,0 +1,19 @@
+# Paths here are TARGET paths (relative to ~), not source names.
+**/.DS_Store
+.config/cmux/cmux.json.cmux-write.lock
+
+{{ if ne .chezmoi.os "darwin" }}
+# macOS-only: GUI apps, Docker/LM Studio paths, the old vim-plug vimrc.
+# .bashrc/.profile are left to the distro's defaults on Linux.
+.bashrc
+.profile
+.vimrc
+.config/ghostty
+.config/ghostty/**
+.config/cmux
+.config/cmux/**
+.config/fish
+.config/fish/**
+Library
+Library/**
+{{ end }}

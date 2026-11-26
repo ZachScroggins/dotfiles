@@ -1,0 +1,218 @@
+# Brewfile.mac: macOS-only. GUI apps (casks), fonts, VS Code extensions and
+# language-level packages (cargo/uv/npm). install-mac.sh installs Node (fnm)
+# and Rust (rustup) first so the cargo/npm lines work on a fresh Mac.
+
+tap "manaflow-ai/cmux"
+# CD/DVD/Blu-ray premastering and recording software
+brew "cdrtools"
+# User-friendly command-line shell for UNIX-like operating systems
+brew "fish"
+
+# Nerd Fonts used by Ghostty/starship (were installed by hand, not in ~/Brewfile)
+cask "font-sauce-code-pro-nerd-font"
+cask "font-fira-code-nerd-font"
+# Image editing and design software
+cask "affinity"
+# Tools for building Android applications
+cask "android-studio"
+# Chromium-based web browser with a vertical tab sidebar
+cask "ardia"
+# Computer-aided design and drafting tool
+cask "cadcraft"
+# OpenAI's official ChatGPT desktop app
+cask "chatgpt"
+# Anthropic's official Claude AI desktop app
+cask "claude"
+# Terminal-based AI coding assistant
+cask "claude-code"
+# Ghostty-based terminal with vertical tabs and notifications for AI coding agents
+cask "cmux"
+# Background desktop automation driver for AI agents
+cask "cuadriver"
+# Presentation editor
+cask "deckcraft"
+# Voice and text chat software
+cask "discord"
+# App to build and share containerised applications and microservices
+cask "docker-desktop"
+# Motion graphics and visual effects compositor
+cask "effectcraft"
+# Launch builds and start simulators from your menu bar
+cask "expo-orbit"
+# Video editor
+cask "filmcraft"
+# Web browser
+cask "firefox"
+# Offline voice-to-text dictation app with AI enhancement
+cask "fluidvoice"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
+# Web browser
+cask "google-chrome"
+# Spreadsheet editor
+cask "gridcraft"
+# Terminal emulator as alternative to Apple's Terminal app
+cask "iterm2"
+# Photo library manager and raw image developer
+cask "lightcraft"
+# Discover, download, and run local LLMs
+cask "lm-studio"
+# Software for Logitech devices
+cask "logi-options+"
+# File system integration
+cask "macfuse"
+# Multi-platform web browser
+cask "microsoft-edge"
+# App to write, plan, collaborate, and get organised
+cask "notion"
+# Open-source software for live streaming and screen recording
+cask "obs"
+# Knowledge base that works on top of a local folder of plain text Markdown files
+cask "obsidian"
+# PDF editor
+cask "pdfcraft"
+# Administration and development platform for PostgreSQL
+cask "pgadmin4"
+# Image editor
+cask "photocraft"
+# Collaboration platform for API development
+cask "postman"
+# VPN client focusing on security
+cask "protonvpn"
+# Imaging utility to install operating systems to a microSD card
+cask "raspberry-pi-imager"
+# Digital audio workstation
+cask "soundcraft"
+# Tool to render realistic skies in real time on the screen
+cask "stellarium"
+# PDF utility
+cask "stirling-pdf"
+# Mesh VPN based on WireGuard
+cask "tailscale-app"
+# Vector editor
+cask "vectorcraft"
+# Disk encryption software focusing on security based on TrueCrypt
+cask "veracrypt"
+# Open-source code editor
+cask "visual-studio-code"
+# Menu bar toolkit with keep-awake, system monitor and volume mixer
+cask "vorssaint"
+# Word processor
+cask "wordcraft"
+# Video communication and virtual meeting platform
+cask "zoom"
+
+vscode "adpyke.codesnap"
+vscode "angular.ng-template"
+vscode "anthropic.claude-code"
+vscode "bierner.markdown-emoji"
+vscode "bierner.markdown-preview-github-styles"
+vscode "bmewburn.vscode-intelephense-client"
+vscode "bradlc.vscode-tailwindcss"
+vscode "catppuccin.catppuccin-vsc"
+vscode "catppuccin.catppuccin-vsc-icons"
+vscode "christian-kohler.npm-intellisense"
+vscode "csstools.postcss"
+vscode "daosro.stylelint"
+vscode "dbaeumer.vscode-eslint"
+vscode "divlo.vscode-styled-jsx-languageserver"
+vscode "divlo.vscode-styled-jsx-syntax"
+vscode "docker.docker"
+vscode "donjayamanne.githistory"
+vscode "dracula-theme.theme-dracula"
+vscode "dsznajder.es7-react-js-snippets"
+vscode "eamodio.gitlens"
+vscode "ecmel.vscode-html-css"
+vscode "enivia.oklch-decorator"
+vscode "esbenp.prettier-vscode"
+vscode "expo.vscode-expo-tools"
+vscode "fill-labs.dependi"
+vscode "formulahendry.auto-close-tag"
+vscode "formulahendry.auto-rename-tag"
+vscode "formulahendry.code-runner"
+vscode "github.github-vscode-theme"
+vscode "github.vscode-github-actions"
+vscode "github.vscode-pull-request-github"
+vscode "graphql.vscode-graphql"
+vscode "graphql.vscode-graphql-syntax"
+vscode "helgardrichard.helium-icon-theme"
+vscode "heybourn.headwind"
+vscode "hookyqr.minify"
+vscode "humao.rest-client"
+vscode "jeff-hykin.better-cpp-syntax"
+vscode "johnpapa.angular2"
+vscode "johnpapa.winteriscoming"
+vscode "junstyle.php-cs-fixer"
+vscode "lihui.vs-color-picker"
+vscode "max-ss.cyberpunk"
+vscode "miguelsolorio.symbols"
+vscode "mikestead.dotenv"
+vscode "ms-azuretools.vscode-containers"
+vscode "ms-azuretools.vscode-docker"
+vscode "ms-dotnettools.csharp"
+vscode "ms-dotnettools.vscode-dotnet-runtime"
+vscode "ms-python.debugpy"
+vscode "ms-python.isort"
+vscode "ms-python.python"
+vscode "ms-python.vscode-pylance"
+vscode "ms-toolsai.jupyter"
+vscode "ms-toolsai.jupyter-keymap"
+vscode "ms-toolsai.jupyter-renderers"
+vscode "ms-toolsai.vscode-jupyter-cell-tags"
+vscode "ms-toolsai.vscode-jupyter-slideshow"
+vscode "ms-vscode-remote.remote-containers"
+vscode "ms-vscode-remote.remote-ssh"
+vscode "ms-vscode-remote.remote-ssh-edit"
+vscode "ms-vscode-remote.remote-wsl"
+vscode "ms-vscode.cmake-tools"
+vscode "ms-vscode.cpp-devtools"
+vscode "ms-vscode.cpptools"
+vscode "ms-vscode.cpptools-extension-pack"
+vscode "ms-vscode.cpptools-themes"
+vscode "ms-vscode.remote-explorer"
+vscode "pkief.material-icon-theme"
+vscode "pmndrs.pmndrs"
+vscode "prisma.prisma"
+vscode "pulkitgangwar.nextjs-snippets"
+vscode "quicktype.quicktype"
+vscode "rangav.vscode-thunder-client"
+vscode "redhat.java"
+vscode "redhat.vscode-yaml"
+vscode "ritwickdey.liveserver"
+vscode "rust-lang.rust-analyzer"
+vscode "saoudrizwan.claude-dev"
+vscode "sdras.night-owl"
+vscode "sh031224.react-component-container-generator"
+vscode "stkb.rewrap"
+vscode "streetsidesoftware.code-spell-checker"
+vscode "svelte.svelte-vscode"
+vscode "syler.sass-indented"
+vscode "tamasfe.even-better-toml"
+vscode "tombonnike.vscode-status-bar-format-toggle"
+vscode "tomoki1207.pdf"
+vscode "typescriptteam.native-preview"
+vscode "tyriar.sort-lines"
+vscode "unifiedjs.vscode-mdx"
+vscode "vadimcn.vscode-lldb"
+vscode "viktorqvarfordt.vscode-pitch-black-theme"
+vscode "vscjava.vscode-gradle"
+vscode "vscjava.vscode-java-debug"
+vscode "vscjava.vscode-java-dependency"
+vscode "vscjava.vscode-java-pack"
+vscode "vscjava.vscode-java-test"
+vscode "vscjava.vscode-maven"
+vscode "vscode-icons-team.vscode-icons"
+vscode "vscodevim.vim"
+vscode "wix.vscode-import-cost"
+vscode "xabikos.javascriptsnippets"
+vscode "xadillax.viml"
+vscode "xdebug.php-debug"
+vscode "xdebug.php-pack"
+vscode "zignd.html-css-class-completion"
+vscode "zobo.php-intellisense"
+cargo "tree-sitter-cli"
+uv "browser-harness"
+npm "@github/copilot"
+npm "cline"
+npm "neon"
+npm "vercel"
