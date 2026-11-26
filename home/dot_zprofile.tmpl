@@ -1,0 +1,38 @@
+{{ if eq .chezmoi.os "darwin" -}}
+# The following lines were added by Docker Desktop to add commands to your PATH.
+export PATH="$PATH:/Users/zach/.docker/bin"
+# End of Docker Desktop section.
+
+# ~/.zprofile — login-shell environment.
+# This is the ONLY place PATH is set. It runs after macOS's /etc/zprofile
+# (path_helper), so the order below is what you actually get.
+
+# Homebrew: sets HOMEBREW_PREFIX and puts /opt/homebrew/{bin,sbin} on PATH
+eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+
+# Remove duplicate PATH entries automatically
+typeset -U path
+
+path=(
+  $HOME/.local/bin      # uv tools and other user-installed CLIs
+  $HOME/.cargo/bin      # Rust (replaces sourcing ~/.cargo/env)
+  $HOME/.docker/bin      # Rust (replaces sourcing ~/.cargo/env)
+  $HOME/perl5/bin       # Perl local::lib
+  $path                 # Homebrew + system (/usr/local/bin has Docker's CLI)
+  $HOME/scripts
+  $HOME/.lmstudio/bin
+)
+export PATH
+
+# Perl local::lib
+export PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:$PERL5LIB}"
+export PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:$PERL_LOCAL_LIB_ROOT}"
+export PERL_MB_OPT="--install_base \"$HOME/perl5\""
+export PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"
+
+# Editor
+export EDITOR=/opt/homebrew/bin/nvim
+{{ else -}}
+# ~/.zprofile — login shells. Re-apply ~/.zshenv in case /etc/profile reset PATH.
+[[ -r ~/.zshenv ]] && source ~/.zshenv
+{{ end -}}

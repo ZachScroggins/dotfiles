@@ -1,0 +1,26 @@
+{{ if eq .chezmoi.os "darwin" -}}
+# ~/.zshenv — runs for every zsh, including scripts.
+# Intentionally empty: PATH and other exports live in ~/.zprofile, because
+# macOS's /etc/zprofile (path_helper) reorders anything set here.
+{{ else -}}
+# ~/.zshenv — runs for every zsh, including scripts and non-login terminals.
+# On Linux/BSD there's no path_helper, so PATH lives here; ~/.zprofile re-sources
+# this file because some distros' /etc/profile resets PATH for login shells.
+
+# Homebrew on Linux (if installed)
+for _brew in /home/linuxbrew/.linuxbrew/bin/brew "$HOME/.linuxbrew/bin/brew"; do
+  if [[ -x $_brew ]]; then eval "$("$_brew" shellenv zsh)"; break; fi
+done
+unset _brew
+
+typeset -U path
+path=(
+  $HOME/.local/bin      # chezmoi, starship, fnm, uv and other user-installed CLIs
+  $HOME/.cargo/bin
+  $path
+  $HOME/scripts
+)
+export PATH
+
+if (( $+commands[nvim] )); then export EDITOR=nvim; else export EDITOR=vi; fi
+{{ end -}}

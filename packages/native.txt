@@ -1,0 +1,40 @@
+# native.txt: Brewfile.core tools by native package name. Used only when
+# Homebrew can't run (Alpine/musl, root-only servers, 32-bit ARM, BSD, --no-brew).
+#
+# Columns: name  command  apt  dnf  pacman  apk  zypper  xbps  pkg(FreeBSD)
+#   command = binary to check afterwards ("-" = no binary, e.g. zsh plugins)
+#   "-" in a manager column = not packaged there; install-cli.sh then tries a
+#   curl installer (starship, zoxide, fnm, uv, chezmoi, lazygit, eza, nvim)
+#   or lists the tool as skipped. Names that don't exist are also skipped.
+#
+# name                  command   apt                      dnf                      pacman                   apk                      zypper                   xbps                     pkg
+chezmoi                 chezmoi   -                        chezmoi                  chezmoi                  chezmoi                  chezmoi                  chezmoi                  chezmoi
+ripgrep                 rg        ripgrep                  ripgrep                  ripgrep                  ripgrep                  ripgrep                  ripgrep                  ripgrep
+fd                      fd        fd-find                  fd-find                  fd                       fd                       fd                       fd                       fd-find
+fzf                     fzf       fzf                      fzf                      fzf                      fzf                      fzf                      fzf                      fzf
+eza                     eza       eza                      eza                      eza                      eza                      eza                      eza                      eza
+neovim                  nvim      neovim                   neovim                   neovim                   neovim                   neovim                   neovim                   neovim
+vim                     vim       vim                      vim-enhanced             vim                      vim                      vim                      vim                      vim
+tmux                    tmux      tmux                     tmux                     tmux                     tmux                     tmux                     tmux                     tmux
+btop                    btop      btop                     btop                     btop                     btop                     btop                     btop                     btop
+htop                    htop      htop                     htop                     htop                     htop                     htop                     htop                     htop
+lazygit                 lazygit   lazygit                  lazygit                  lazygit                  lazygit                  lazygit                  lazygit                  lazygit
+gh                      gh        gh                       gh                       github-cli               github-cli               gh                       github-cli               gh
+starship                starship  -                        -                        starship                 starship                 starship                 starship                 starship
+zoxide                  zoxide    zoxide                   zoxide                   zoxide                   zoxide                   zoxide                   zoxide                   zoxide
+fnm                     fnm       -                        -                        fnm                      -                        -                        -                        -
+uv                      uv        -                        uv                       uv                       uv                       uv                       uv                       -
+tealdeer                tldr      tealdeer                 -                        tealdeer                 -                        tealdeer                 tealdeer                 tealdeer
+tokei                   tokei     tokei                    tokei                    tokei                    tokei                    tokei                    tokei                    tokei
+tree                    tree      tree                     tree                     tree                     tree                     tree                     tree                     tree
+wget                    wget      wget                     wget2-wget               wget                     wget                     wget                     wget                     wget
+unar                    unar      unar                     unar                     unarchiver               -                        unar                     unar                     unar
+sevenzip                7z        7zip                     7zip                     7zip                     7zip                     7zip                     7zip                     7-zip
+fastfetch               fastfetch fastfetch                fastfetch                fastfetch                fastfetch                fastfetch                fastfetch                fastfetch
+superfile               spf       -                        -                        superfile                -                        -                        -                        -
+ast-grep                ast-grep  -                        -                        ast-grep                 ast-grep                 -                        -                        -
+yt-dlp                  yt-dlp    yt-dlp                   yt-dlp                   yt-dlp                   yt-dlp                   yt-dlp                   yt-dlp                   yt-dlp
+lua                     lua       lua5.4                   lua                      lua                      lua5.4                   lua54                    lua54                    lua54
+luarocks                -         luarocks                 luarocks                 luarocks                 luarocks5.4              lua54-luarocks           luarocks                 lua54-luarocks
+zsh-autosuggestions     -         zsh-autosuggestions      zsh-autosuggestions      zsh-autosuggestions      zsh-autosuggestions      zsh-autosuggestions      zsh-autosuggestions      zsh-autosuggestions
+zsh-syntax-highlighting -         zsh-syntax-highlighting  zsh-syntax-highlighting  zsh-syntax-highlighting  zsh-syntax-highlighting  zsh-syntax-highlighting  zsh-syntax-highlighting  zsh-syntax-highlighting

@@ -1,0 +1,6 @@
+# Fallback for projects without their own ruff/pyproject config
+line-length = 100
+indent-width = 4
+
+[format]
+indent-style = "space"

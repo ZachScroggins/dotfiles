@@ -1,0 +1,11 @@
+[user]
+	name = ZachScroggins
+	email = 58402189+ZachScroggins@users.noreply.github.com
+[color]
+	ui = auto
+[hub]
+	protocol = ssh
+[alias]
+  ac = !git add -A && git commit -m
+[http]
+	postBuffer = 524288000
